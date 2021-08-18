@@ -1,14 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+// import { myAction } from './redux/actions';
 
 import 'modern-normalize/modern-normalize.css';
 import './index.scss';
 
+// console.log(store);
+// store.dispatch(myAction(5));
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
