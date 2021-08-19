@@ -1,61 +1,12 @@
 import React from 'react';
-
-import { connect } from 'react-redux';
-import contactsActions from '../../redux/contacts/contacts-actions';
+// import { connect } from 'react-redux';
+// import contactsActions from '../../redux/contacts/contacts-actions';
 import PropTypes from 'prop-types';
 
 import IconButton from '../IconButton';
 import { ReactComponent as IconDelete } from '../icons/icon-close-delete.svg';
 
 import styles from './ContactList.module.scss';
-
-// const Button = ({ onDeleteContact }) => (
-//   <button onClick={onDeleteContact} className={styles.Button}>
-//     Delete
-//   </button>
-// );
-
-// const ContactItem = ({ name, number, onDeleteContact }) => (
-//   <li className={styles.ContactItem}>
-//     <p className={styles.Contact}>
-//       <span className={styles.ContactName}>{name}:</span> {number}
-//     </p>
-//     <Button onDeleteContact={onDeleteContact} />
-//   </li>
-// );
-
-// const ContactList = ({ contacts, onDeleteContact }) => {
-//   if (contacts.length === 0) return null;
-//   return (
-//     <ul className={styles.ContactList}>
-//       {contacts.map(({ id, name, number }) => (
-//         <ContactItem
-//           key={id}
-//           name={name}
-//           number={number}
-//           onDeleteContact={() => onDeleteContact(id)}
-//         />
-//       ))}
-//     </ul>
-//   );
-// };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     }),
-//   ).isRequired,
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
-
-// const Button = ({ onDeleteContact }) => (
-//   <button onClick={onDeleteContact} className={styles.Button}>
-//     Delete
-//   </button>
-// );
 
 const ContactItem = ({ name, number, onDeleteContact }) => (
   <li className={styles.ContactItem}>
@@ -98,38 +49,40 @@ ContactList.propTypes = {
   // onDeleteContact: PropTypes.func.isRequired,
 };
 
-const getVisibleContacts = (allContacts, filter) => {
-  const normalizedFilter = filter.toLowerCase();
-  return allContacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter),
-  );
-};
+export default ContactList;
 
-const getVisibleContactsSortByName = (allContacts, filter) => {
-  const visibleContacts = getVisibleContacts(allContacts, filter);
+// const getVisibleContacts = (allContacts, filter) => {
+//   const normalizedFilter = filter.toLowerCase();
+//   return allContacts.filter(contact =>
+//     contact.name.toLowerCase().includes(normalizedFilter),
+//   );
+// };
 
-  const visibleContactsSortByName = visibleContacts.sort((a, b) => {
-    const nameA = a.name.toUpperCase();
-    const nameB = b.name.toUpperCase();
+// const getVisibleContactsSortByName = (allContacts, filter) => {
+//   const visibleContacts = getVisibleContacts(allContacts, filter);
 
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
+//   const visibleContactsSortByName = visibleContacts.sort((a, b) => {
+//     const nameA = a.name.toUpperCase();
+//     const nameB = b.name.toUpperCase();
 
-  return visibleContactsSortByName;
-};
+//     if (nameA < nameB) {
+//       return -1;
+//     }
+//     if (nameA > nameB) {
+//       return 1;
+//     }
+//     return 0;
+//   });
 
-const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  contacts: getVisibleContactsSortByName(items, filter),
-});
+//   return visibleContactsSortByName;
+// };
 
-const mapDispatchToProps = dispatch => ({
-  onDeleteContact: id => dispatch(contactsActions.deleteContact(id)),
-});
+// const mapStateToProps = ({ contacts: { items, filter } }) => ({
+//   contacts: getVisibleContactsSortByName(items, filter),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+// const mapDispatchToProps = dispatch => ({
+//   onDeleteContact: id => dispatch(contactsActions.deleteContact(id)),
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
