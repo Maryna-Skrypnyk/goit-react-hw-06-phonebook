@@ -1,10 +1,14 @@
 import React from 'react';
-// import { connect } from 'react-redux';
-// import contactsActions from '../../redux/contacts/contacts-actions';
+import { useSelector, useDispatch } from 'react-redux';
+import contactsActions from '../../redux/contacts/contacts-actions';
+import { getFilter } from '../../redux/contacts/contacts-selectors';
 import PropTypes from 'prop-types';
 import styles from './Filter.module.scss';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const value = useSelector(getFilter);
+  const dispatch = useDispatch();
+
   return (
     <label className={styles.Label}>
       <span className={styles.LabelText}>Find contacts by name</span>
@@ -12,7 +16,9 @@ const Filter = ({ value, onChange }) => {
         type="text"
         name="name"
         value={value}
-        onChange={onChange}
+        onChange={event =>
+          dispatch(contactsActions.changeFilter(event.target.value))
+        }
         placeholder="Enter name"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
@@ -29,13 +35,3 @@ Filter.propTypes = {
 };
 
 export default Filter;
-
-// const mapStateToProps = state => ({
-//   value: state.contacts.filter,
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   onChange: event => dispatch(contactsActions.changeFilter(event.target.value)),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Filter);
