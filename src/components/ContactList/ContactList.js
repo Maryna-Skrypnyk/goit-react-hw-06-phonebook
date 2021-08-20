@@ -32,7 +32,7 @@ const ContactList = () => {
   const contacts = useSelector(getVisibleContactsSortByName);
   const dispatch = useDispatch();
 
-  const deleteContact = id => dispatch(contactsActions.deleteContact(id));
+  const onDeleteContact = id => dispatch(contactsActions.deleteContact(id));
 
   if (contacts.length === 0) {
     return <p>There are no contacts in the list</p>;
@@ -45,7 +45,7 @@ const ContactList = () => {
           key={id}
           name={name}
           number={number}
-          onDeleteContact={() => deleteContact(id)}
+          onDeleteContact={() => onDeleteContact(id)}
         />
       ))}
     </ul>
