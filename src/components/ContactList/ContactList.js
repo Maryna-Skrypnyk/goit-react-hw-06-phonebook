@@ -9,22 +9,24 @@ import { ReactComponent as IconDelete } from '../icons/icon-close-delete.svg';
 
 import styles from './ContactList.module.scss';
 
-const ContactItem = ({ name, number, onDeleteContact }) => (
-  <li className={styles.ContactItem}>
-    <p className={styles.Contact}>
-      <span className={styles.ContactName}>{name}:</span> {number}
-    </p>
-    <IconButton onDeleteContact={onDeleteContact} aria-label="Delete contact">
-      <IconDelete width={15} height={15} />
-    </IconButton>
-  </li>
-);
+const ContactItem = ({ name, number, onDeleteContact }) => {
+  return (
+    <li className={styles.ContactItem}>
+      <p className={styles.Contact}>
+        <span className={styles.ContactName}>{name}:</span> {number}
+      </p>
+      <IconButton onDeleteContact={onDeleteContact} aria-label="Delete contact">
+        <IconDelete width={15} height={15} />
+      </IconButton>
+    </li>
+  );
+};
 
-// ContactItem.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
+ContactItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
+};
 
 const ContactList = () => {
   const contacts = useSelector(getVisibleContactsSortByName);
@@ -50,15 +52,15 @@ const ContactList = () => {
   );
 };
 
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     }),
-//   ).isRequired,
-//   // onDeleteContact: PropTypes.func.isRequired,
-// };
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      // name: PropTypes.string.isRequired,
+      // number: PropTypes.string.isRequired,
+    }),
+  ),
+  // onDeleteContact: PropTypes.func.isRequired,
+};
 
 export default ContactList;

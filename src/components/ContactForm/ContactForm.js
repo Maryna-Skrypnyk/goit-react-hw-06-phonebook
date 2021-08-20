@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import contactsActions from '../../redux/contacts/contacts-actions';
+
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
@@ -36,10 +37,35 @@ function ContactForm() {
     e.preventDefault();
 
     dispatch(contactsActions.addContact(name, number));
-    // onSubmit(name, number);
-    if ((!name && number) || (name && !number)) {
-      return;
-    }
+
+    // if ((!name && number) || (name && !number)) {
+    //   return;
+    // }
+
+    // if (contacts.find(contact => contact.name === name)) {
+    //   alert(`${name} is already in contacts`);
+    //   return;
+    // }
+
+    // if (contacts.find(contact => contact.number === number)) {
+    //   alert(`Number ${number} is already in contacts`);
+    //   return;
+    // }
+
+    // if ((!name || name.trim() === '') && (!number || number.trim() === '')) {
+    //   alert('Fill in the fields "Name" and "Number"');
+    //   return;
+    // }
+
+    // if (!name || name.trim() === '') {
+    //   alert('Field "Name" is empty');
+    //   return;
+    // }
+
+    // if (!number || number.trim() === '') {
+    //   alert('Field "Number" is empty');
+    //   return;
+    // }
 
     reset();
   };
@@ -62,7 +88,7 @@ function ContactForm() {
           placeholder="Enter name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-          // required
+          required
           maxLength="40"
           className={styles.Input}
         />
@@ -79,7 +105,7 @@ function ContactForm() {
           placeholder="Enter number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-          // required
+          required
           maxLength="18"
           className={styles.Input}
         />
