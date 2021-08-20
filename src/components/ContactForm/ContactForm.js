@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getVisibleContactsSortByName } from '../../redux/contacts/contacts-selectors';
-import contactsActions from '../../redux/contacts/contacts-actions';
+import { addContact } from '../../redux/contacts/contacts-actions';
 
-// import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
 import styles from './ContactForm.module.scss';
@@ -64,7 +63,7 @@ function ContactForm() {
       return;
     }
 
-    dispatch(contactsActions.addContact(name, number));
+    dispatch(addContact(name, number));
 
     reset();
   };
@@ -116,9 +115,5 @@ function ContactForm() {
     </form>
   );
 }
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
 
 export default ContactForm;

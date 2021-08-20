@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import contactsActions from '../../redux/contacts/contacts-actions';
+import { deleteContact } from '../../redux/contacts/contacts-actions';
 import { getVisibleContactsSortByName } from '../../redux/contacts/contacts-selectors';
 import PropTypes from 'prop-types';
 
@@ -32,7 +32,7 @@ const ContactList = () => {
   const contacts = useSelector(getVisibleContactsSortByName);
   const dispatch = useDispatch();
 
-  const onDeleteContact = id => dispatch(contactsActions.deleteContact(id));
+  const onDeleteContact = id => dispatch(deleteContact(id));
 
   if (contacts.length === 0) {
     return <p>There are no contacts in the list</p>;
