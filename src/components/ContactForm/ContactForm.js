@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getVisibleContactsSortByName } from '../../redux/contacts/contacts-selectors';
 import contactsActions from '../../redux/contacts/contacts-actions';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
 import styles from './ContactForm.module.scss';
@@ -10,7 +11,7 @@ import styles from './ContactForm.module.scss';
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
+  const contacts = useSelector(getVisibleContactsSortByName);
   const dispatch = useDispatch();
 
   const nameInputId = shortid.generate();
@@ -36,36 +37,34 @@ function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
+    const { name, number } = e.target;
+
+    if (contacts.find(contact => contact.name === name.value)) {
+      alert(`${name.value} is already in contacts`);
+      return;
+    }
+
+    if (contacts.find(contact => contact.number === number.value)) {
+      alert(`Number ${number.value} is already in contacts`);
+      return;
+    }
+
+    if ((!name || name.trim() === '') && (!number || number.trim() === '')) {
+      alert('Fill in the fields "Name" and "Number"');
+      return;
+    }
+
+    if (!name || name.trim() === '') {
+      alert('Field "Name" is empty');
+      return;
+    }
+
+    if (!number || number.trim() === '') {
+      alert('Field "Number" is empty');
+      return;
+    }
+
     dispatch(contactsActions.addContact(name, number));
-
-    // if ((!name && number) || (name && !number)) {
-    //   return;
-    // }
-
-    // if (contacts.find(contact => contact.name === name)) {
-    //   alert(`${name} is already in contacts`);
-    //   return;
-    // }
-
-    // if (contacts.find(contact => contact.number === number)) {
-    //   alert(`Number ${number} is already in contacts`);
-    //   return;
-    // }
-
-    // if ((!name || name.trim() === '') && (!number || number.trim() === '')) {
-    //   alert('Fill in the fields "Name" and "Number"');
-    //   return;
-    // }
-
-    // if (!name || name.trim() === '') {
-    //   alert('Field "Name" is empty');
-    //   return;
-    // }
-
-    // if (!number || number.trim() === '') {
-    //   alert('Field "Number" is empty');
-    //   return;
-    // }
 
     reset();
   };
