@@ -48,17 +48,20 @@ function ContactForm() {
       return;
     }
 
-    if ((!name || name.trim() === '') && (!number || number.trim() === '')) {
+    if (
+      (!name || name.value.trim() === '') &&
+      (!number || number.value.trim() === '')
+    ) {
       alert('Fill in the fields "Name" and "Number"');
       return;
     }
 
-    if (!name || name.trim() === '') {
+    if (!name || name.value.trim() === '') {
       alert('Field "Name" is empty');
       return;
     }
 
-    if (!number || number.trim() === '') {
+    if (!number || number.value.trim() === '') {
       alert('Field "Number" is empty');
       return;
     }
