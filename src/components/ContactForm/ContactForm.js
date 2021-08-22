@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getVisibleContactsSortByName } from '../../redux/contacts/contacts-selectors';
 import { addContact } from '../../redux/contacts/contacts-actions';
-
 import shortid from 'shortid';
 
 import styles from './ContactForm.module.scss';
@@ -36,38 +35,40 @@ function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const { name, number } = e.target;
+    // const { name, number } = e.target;
+    // const {
+    //   target: { name, number },
+    // } = e;
 
-    if (contacts.find(contact => contact.name === name.value)) {
-      alert(`${name.value} is already in contacts`);
+    if (contacts.find(contact => contact.name === e.target.name.value)) {
+      alert(`${e.target.name.value} is already in contacts`);
       return;
     }
 
-    if (contacts.find(contact => contact.number === number.value)) {
-      alert(`Number ${number.value} is already in contacts`);
+    if (contacts.find(contact => contact.number === e.target.number.value)) {
+      alert(`Number ${e.target.number.value} is already in contacts`);
       return;
     }
 
     if (
-      (!name || name.value.trim() === '') &&
-      (!number || number.value.trim() === '')
+      (!name || e.target.name.value.trim() === '') &&
+      (!number || e.target.number.value.trim() === '')
     ) {
       alert('Fill in the fields "Name" and "Number"');
       return;
     }
 
-    if (!name || name.value.trim() === '') {
+    if (!name || e.target.name.value.trim() === '') {
       alert('Field "Name" is empty');
       return;
     }
 
-    if (!number || number.value.trim() === '') {
+    if (!number || e.target.number.value.trim() === '') {
       alert('Field "Number" is empty');
       return;
     }
 
     dispatch(addContact(name, number));
-
     reset();
   };
 

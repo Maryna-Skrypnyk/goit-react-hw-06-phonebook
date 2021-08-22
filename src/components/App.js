@@ -6,7 +6,7 @@ import ContactList from '../components/ContactList';
 
 import './App.module.scss';
 
-export default function App() {
+function App() {
   return (
     <Layout>
       <h1>Phonebook</h1>
@@ -18,3 +18,5 @@ export default function App() {
     </Layout>
   );
 }
+
+export default App;
